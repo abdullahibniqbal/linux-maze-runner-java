@@ -1,11 +1,6 @@
-package linux.maze.runner.web.persistence.entities;
+package linux.maze.runner.web.dtos;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
-@Entity
-@DiscriminatorValue("1")
-public class Question extends DrawableEntity {
+public class QuestionDto extends DrawableDto {
     private String title;
     private String description;
 

@@ -2,12 +2,14 @@ package linux.maze.runner.web.service;
 
 import linux.maze.runner.web.dtos.DrawableDto;
 import linux.maze.runner.web.mappers.DtoToEntityMapper;
+import linux.maze.runner.web.mappers.EntityToDtoMapper;
 import linux.maze.runner.web.persistence.entities.Answer;
 import linux.maze.runner.web.persistence.entities.DrawableEntity;
 import linux.maze.runner.web.persistence.repositories.DrawablesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,17 +17,19 @@ public class DrawablesServiceImpl implements DrawablesService {
     @Autowired
     private DrawablesRepository drawablesRepository;
 
-    public List<DrawableEntity> getDrawables() {
-        drawablesRepository.save(new Answer("Use yum to install MySQL."));
-        drawablesRepository.save(new Answer("Use binaries to install MySQL."));
+    public List<DrawableDto> getDrawables() {
+        List<DrawableEntity> drawableEntities = drawablesRepository.findAll();
 
-        return drawablesRepository.findAll();
+        List<DrawableDto> drawableDtos = new ArrayList<DrawableDto>();
+        drawableEntities.forEach(entity -> drawableDtos.add(EntityToDtoMapper.mapDrawable(entity)));
+
+        return drawableDtos;
     }
 
     @Override
     public void saveDrawable(DrawableDto drawableDto) {
-        DrawableEntity drawable = DtoToEntityMapper.mapDrawable(drawableDto);
+        DrawableEntity drawableEntity = DtoToEntityMapper.mapDrawable(drawableDto);
 
-        drawablesRepository.save(drawable);
+        drawablesRepository.save(drawableEntity);
     }
 }

@@ -9,7 +9,7 @@ public class DrawableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected String id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     protected DrawableEntity decorator;
 
     public String getId() {
@@ -18,5 +18,13 @@ public class DrawableEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public DrawableEntity getDecorator() {
+        return decorator;
+    }
+
+    public void setDecorator(DrawableEntity decorator) {
+        this.decorator = decorator;
     }
 }

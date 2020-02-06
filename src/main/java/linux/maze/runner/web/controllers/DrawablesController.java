@@ -25,13 +25,13 @@ public class DrawablesController {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public List<DrawableEntity> getDrawables() {
+    public List<DrawableDto> getDrawables() {
         return drawablesService.getDrawables();
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public BaseDto saveDrawable(@RequestBody DrawableDto requestDto) {
-        drawablesService.save();
+        drawablesService.saveDrawable(requestDto);
 
         return requestDto;
     }

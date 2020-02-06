@@ -6,6 +6,6 @@ import linux.maze.runner.web.persistence.entities.DrawableEntity;
 import java.util.List;
 
 public interface DrawablesService {
-    public List<DrawableEntity> getDrawables();
+    public List<DrawableDto> getDrawables();
     public void saveDrawable(DrawableDto drawableDto);
 }
